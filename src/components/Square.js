@@ -5,7 +5,7 @@ export default class Square extends React.Component {
   render() {
     return (
     <button className="square">
-      0
+       {this.props.value}
     </button>
     )
   }
