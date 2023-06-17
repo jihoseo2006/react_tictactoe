@@ -4,10 +4,10 @@ import "./Square.css";
 const Square = ({ onClick, value}) => {
     return (
     <button className="square" 
-      onClick={onClick() }>
+      onClick={onClick}>
        {value}
     </button>
     )
 }
 
-export default Square
+export default Square;

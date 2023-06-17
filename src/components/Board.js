@@ -4,10 +4,10 @@ import "./Board.css";
 
 const Board  = () => {
 
-  const [squares, setSquares] = useState(Array.fill(null));
+  const [squares, setSquares] = useState(Array(9).fill(null));
 
 
-  const  handleClick = (i) => {
+  const handleClick = (i) => {
     const newSquares = squares.slice();
     newSquares[i] = 'X';
     setSquares(newSquares);
@@ -15,8 +15,8 @@ const Board  = () => {
 
 
   const renderSquare = (i) => {
-    return <Square value={this.state.squares[i]} 
-    onClick={() => this.handleClick(i)}  />
+    return <Square value={squares[i]} 
+        onClick={() => handleClick(i)}  />
   }
 
 
@@ -43,4 +43,4 @@ const Board  = () => {
 }
 
 
-export default Board
+export default Board;
