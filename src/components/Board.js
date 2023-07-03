@@ -3,10 +3,29 @@ import Square from './Square'
 import "./Board.css";
 
 const Board  = () => {
-
+  
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setxIsNext] = useState(true);
   
+  
+  const calculateWinner = (squares) => {
+    const lines = [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [2,4,6]
+    ]
+    for( let index = 0; index < lines.length; index++){
+      const [a,b,c] = lines[index];
+      if(squares[a] && squares[a] === squares[b])
+    }
+  }
+
+  const winner = calculateWinner(squares);
   const status = `Next player: ${xIsNext ? 'X' : 'O'}`;
 
   const handleClick = (i) => {
@@ -15,6 +34,7 @@ const Board  = () => {
     setSquares(newSquares);
     setxIsNext(prev => !prev);
   }
+
 
 
   const renderSquare = (i) => {
