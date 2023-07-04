@@ -63,3 +63,5 @@ const Board  = () => {
 
 
 export default Board;
+
+//학원 진도도 그렇고 이제 다시 js 공부를 해야할 떄가 온거 같아요... js 끝나고 다시 리엑트 해야할때 돌아옴
