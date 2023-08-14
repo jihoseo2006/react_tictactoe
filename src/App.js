@@ -32,15 +32,52 @@ function App() {
     return null;
   }
 
-  const winner = calculateWinner(squares);
+  const current = history[history.length - 1];
+  const winner = calculateWinner(current.squares);
+
+  let status;
+  if(winner){
+    status = 'Winner: ' + winner;
+  }else {
+    status = `Next player: ${xIsNext ? 'X' : 'O'}`;
+  }
+
+  const handleClick = (i) => {
+    const newSquares = current.squares.slice();
+    console.log('newSquares', newSquares);
+    console.log('newSquares[i]', newSquares[i]);
+    
+    if(calculateWinner(newSquares) || newSquares[i])
+    {
+      return;
+    }
+
+    newSquares[i] = xIsNext ? 'X': 'O';
+    setHistory([...history, {squares: newSquares}]);
+    setxIsNext(prev => !prev);
+    
+  }
+
+  const moves = history.map((step, move) => {
+    const desc = move ? 
+    'Go to move #' + move :
+    'Go to game start';
+    return (
+      <li key={move}>
+        <button>{desc}</button>
+      </li>
+    )
+  })
   
+
   return (
     <div className="game">
       <div className="game-board">
-        <Board />
+        <Board squares={current.squares} onClick={(i) => handleClick(i)} />
       </div>
       <div className="game-info">
-        game-info
+        <div className='status'>{status}</div>
+         <ol>{moves}</ol>
       </div>
     </div>
   );
