@@ -6,6 +6,9 @@ function App() {
   
   const [history, setHistory] = useState([{ squares: Array(9).fill(null)}]);
   const [xIsNext, setxIsNext] = useState(true);
+  const [stepNumber, setStepNumber] = useState(0);
+  const current = history[history.length - 1];
+
 
 
   const calculateWinner = (squares) => {
@@ -32,7 +35,6 @@ function App() {
     return null;
   }
 
-  const current = history[history.length - 1];
   const winner = calculateWinner(current.squares);
 
   let status;
@@ -64,10 +66,15 @@ function App() {
     'Go to game start';
     return (
       <li key={move}>
-        <button>{desc}</button>
+        <button onClick={() => jumpTo(move)}>{desc}</button>
       </li>
     )
   })
+
+  const jumpTo = (step) => {
+    setStepNumber(step);
+    setxIsNext((step % 2) === 0 )
+  }
   
 
   return (
