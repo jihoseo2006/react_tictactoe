@@ -7,10 +7,9 @@ function App() {
   const [history, setHistory] = useState([{ squares: Array(9).fill(null)}]);
   const [xIsNext, setxIsNext] = useState(true);
   const [stepNumber, setStepNumber] = useState(0);
-  const current = history[history.length - 1];
-
-
-
+  
+  
+  
   const calculateWinner = (squares) => {
     const lines = [
       [0, 1, 2],
@@ -29,12 +28,13 @@ function App() {
         && squares[a] === squares[c])
         {
           console.log('squares[a]', squares[a]);
-        return squares[a];
+          return squares[a];
+        }
       }
+      return null;
     }
-    return null;
-  }
-
+    
+  const current = history[stepNumber];
   const winner = calculateWinner(current.squares);
 
   let status;
@@ -45,9 +45,9 @@ function App() {
   }
 
   const handleClick = (i) => {
-    const newSquares = current.squares.slice();
-    console.log('newSquares', newSquares);
-    console.log('newSquares[i]', newSquares[i]);
+    const newHistory = history.slice(0, stepNumber + 1);
+    const newCurrent = newHistory[newHistory.length - 1];
+    const newSquares = newCurrent.squares.slice();
     
     if(calculateWinner(newSquares) || newSquares[i])
     {
@@ -55,9 +55,9 @@ function App() {
     }
 
     newSquares[i] = xIsNext ? 'X': 'O';
-    setHistory([...history, {squares: newSquares}]);
+    setHistory([...newHistory, {squares: newSquares}]);
     setxIsNext(prev => !prev);
-    
+    setStepNumber(newHistory.length);
   }
 
   const moves = history.map((step, move) => {
@@ -73,7 +73,8 @@ function App() {
 
   const jumpTo = (step) => {
     setStepNumber(step);
-    setxIsNext((step % 2) === 0 )
+    setxIsNext((step % 2) === 0);
+
   }
   
 
